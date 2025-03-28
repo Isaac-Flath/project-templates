@@ -1,0 +1,60 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+# Project Structure
+
+The main file for the project is [app/main.py](mdc:project-templates/project-templates/project-templates/project-templates/project-templates/app/main.py). It uses MonsterUI for styling.  MonsterUI is a python first UI component library that primarily leverages FrankenUI and Tailwind, but also includes headers and functionality form DaisyUI, Katex, HighlightJS, and others.
+
+You can run the server with the command`python app/main.py`, which will start the server on http://localhost:5001.
+
+# Key documentation files:
+
+These are relevant documents that should be referenced while building a FastHTML App.
+
+- [htmx.md](mdc:project-templates/project-templates/project-templates/project-templates/project-templates/MonsterUI/ref_docs/htmx.md): Minimal HTMX integration exaples to show how HTMX can be used with fasthtml
+- [db.md](mdc:project-templates/project-templates/project-templates/project-templates/project-templates/ref_docs/db.md): MiniDataAPI Spec for database operations
+- [monsterui-llms-ctx.txt](mdc:project-templates/project-templates/MonsterUI/ref_docs/monsterui-llms-ctx.txt): MonsterUI API and idiomatic examples for UI components
+
+# FastHTML examples
+
+Reference these examples when constructing new FastHTML applications.
+
+- [annotation.md](mdc:project-templates/project-templates/project-templates/project-templates/MonsterUI/ref_docs/annotation.md): A siple example of a annotation app to evaluate search results.  
+- Adv_app: Example FastHTML To-Do-List application that demonstrates core FastHTML features including authentication, HTMX integration, and database operations. It allows users to create, edit, delete, and reorder todos with markdown support, using SQLite for storage.
+
+# FastHTML Rules
+
+- Use `serve()` directly - no need for uvicorn or separate ASGI server
+- Not compatible with FastAPI syntax - FastHTML is for HTML-first apps, not API services
+- Define routes with decorators and return HTML components or strings
+- Use FastTags instead of raw HTML where possible
+- Use HTMX for interactive features, vanilla JS where needed. No React/Vue/Svelte
+
+## UI Design Patterns
+
+Follow these patterns for a consistent, modern Next.js-like look:
+
+### Layout Structure
+```python
+def layout(content):
+    return Container( 
+        navbar(),
+        Main(Container(content)),
+        footer())
+
+def page(): return layout(content)
+```
+
+### Component Patterns
+
+- Use defaults as much as possible, for example `Container` in monsterui already has defaults for margins
+- Use `*T` for button styling consistency, for example `ButtonT.destructive` for a red delete button or `ButtonT.primary` for a CTA button
+- Use `Label*` functions for forms as much as possible (e.g. `LabelInput`, `LabelRange`) which creates and links both the `FormLabel` and user input appropriately to avoid boiler plate
+
+## Data Storage
+
+- `fastlite` (SQLite) included and preferred.
+- `sqlite-utils` is also a good option and sqlite-utils is compatible with fastlite
