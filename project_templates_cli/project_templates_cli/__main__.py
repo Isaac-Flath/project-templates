@@ -25,8 +25,7 @@ def list():
     
     descriptions = {
         "MonsterUI": "A modern UI template with Monster UI components",
-        "Tailwind": "A template with Tailwind CSS setup"
-    }
+        "Tailwind": "A template with Tailwind CSS setup"}
     
     for template in templates:
         description = descriptions.get(template, "A project template")
@@ -45,8 +44,7 @@ def create(
     if template not in templates:
         console.print(f"[red]Error: Template '{template}' not found.[/red]")
         console.print("\nAvailable templates:")
-        for t in templates:
-            console.print(f"  - {t}")
+        for t in templates: console.print(f"  - {t}")
         raise typer.Exit(1)
     
     if os.path.exists(project_name):
