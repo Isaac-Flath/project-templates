@@ -1,0 +1,1 @@
+"""Template package for project-templates-cli""" 
